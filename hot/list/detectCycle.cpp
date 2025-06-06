@@ -17,15 +17,33 @@ struct ListNode {
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
-        // 类似于两数之和的哈希表做法
-        unordered_set<ListNode*> lset;
-        ListNode *index = head;
+        // // 类似于两数之和的哈希表做法
+        // unordered_set<ListNode*> lset;
+        // ListNode *index = head;
 
-        while(index != NULL){
-            if(lset.find(index) != lset.end())
-                return index;
-            lset.insert(index);
-            index = index->next;
+        // while(index != NULL){
+        //     if(lset.find(index) != lset.end())
+        //         return index;
+        //     lset.insert(index);
+        //     index = index->next;
+        // }
+        // return nullptr;
+
+        if(head == nullptr || head->next == nullptr)    return nullptr;
+
+        ListNode *fast = head, *slow = head;
+        while(fast && fast->next){
+            fast = fast->next->next;
+            slow = slow->next;
+
+            if(fast == slow){
+                slow = head;
+                while(fast != slow){
+                    fast = fast->next;
+                    slow = slow->next;
+                }
+                return slow;
+            }
         }
         return nullptr;
     }
