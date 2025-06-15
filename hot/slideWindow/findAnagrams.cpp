@@ -15,12 +15,13 @@ using namespace std;
 class Solution {
 public:
     vector<int> findAnagrams(string s, string p) {
+        if(s.size() < p.size()) return vector<int>();
         vector<int> ans;
         vector<int> window(26), arrp(26);
 
         for(int i = 0; i < p.length(); i++){
             arrp[p[i] - 'a']++;
-            window[p[i] - 'a']++;
+            window[s[i] - 'a']++;
         }
         if(arrp == window)
             ans.push_back(0);

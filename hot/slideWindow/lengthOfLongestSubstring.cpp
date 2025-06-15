@@ -16,7 +16,6 @@ class Solution {
                 if(map.find(s[r]) != map.end() && map[s[r]] >= l){  // 保证L只会向前移动
                     l = map[s[r]] + 1;
                 }
-
                 map[s[r]] = r;
                 maxw = max(maxw, r-l+1);
                 r++;
