@@ -5,21 +5,28 @@ using namespace std;
 class Solution {
 public:
     vector<string> generateParenthesis(int n) {
-        vector<string> result;
-        string path;
-        backtrack(n, n, result, path);
-        return result;
+        vector<string> ans;
+        string path = "";
+        generateHelper(n, n, ans, path);
+        return ans;
     }
 
-    void backtrack(int left, int right, vector<string>& result, string path){
-        if(left == 0 && right == 0){
-            result.push_back(path);
-            return ;
+    void generateHelper(int left, int right, vector<string> &ans, string path){
+        if(left == right && left == 0){
+            ans.push_back(path);
+            return;
         }
-           
-        if(left > 0)
-            backtrack(left-1, right, result, path+'(');
-        if(right > left)
-            backtrack(left, right-1, result, path+')');
+
+        if(left > 0){
+            path += '(';
+            generateHelper(left-1, right, ans, path);
+            path.pop_back();
+        }
+
+        if(right > left){
+            path += ')';
+            generateHelper(left, right-1, ans, path);
+            path.pop_back();
+        }
     }
 };
