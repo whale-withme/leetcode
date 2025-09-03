@@ -14,6 +14,7 @@ struct Compare{
 class Solution {
 
 public:
+
     ListNode* mergeKLists(vector<ListNode*>& lists) {
        priority_queue<ListNode*, vector<ListNode*>, Compare> heap;
        ListNode* head = new ListNode(0), *index = head;
